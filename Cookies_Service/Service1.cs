@@ -15,6 +15,10 @@ namespace Cookies_Service
         public Service1()
         {
             InitializeComponent();
+            this.CanStop = true;
+            this.CanShutdown = true;
+            this.CanPauseAndContinue = true;
+            this.AutoLog = true;
         }
 
         protected override void OnStart(string[] args)
