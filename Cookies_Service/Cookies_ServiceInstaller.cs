@@ -14,6 +14,22 @@ namespace Cookies_Service
         public Cookies_ServiceInstaller()
         {
             InitializeComponent();
+            this.AfterInstall += Cookies_ServiceInstaller_AfterInstall;
+            this.AfterRollback += Cookies_ServiceInstaller_AfterRollback;
+        }
+
+        private void Cookies_ServiceInstaller_AfterRollback(object sender, InstallEventArgs e)
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine("Failed!");
+            Console.BackgroundColor = ConsoleColor.Black;
+        }
+
+        private void Cookies_ServiceInstaller_AfterInstall(object sender, InstallEventArgs e)
+        {
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.WriteLine("Success!");
+            Console.BackgroundColor = ConsoleColor.Black;
         }
     }
 }
