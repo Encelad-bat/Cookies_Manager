@@ -7,6 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="600">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="0.05*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.05*"></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="data_ListView" Grid.ColumnSpan="5" Background="CornflowerBlue"></ListView>
+        <Canvas Grid.Row="2" Grid.Column="0" Background="CornflowerBlue" Grid.ColumnSpan="5"></Canvas>
+        <Canvas Grid.Row="1" Grid.Column="0" Background="CornflowerBlue" Grid.ColumnSpan="5"></Canvas>
+        <Canvas Grid.Row="3" Grid.Column="0" Background="CornflowerBlue" Grid.ColumnSpan="5"></Canvas>
+        <Button Grid.Row="2" Grid.Column="0" Content="Chrome Cookies" Background="BurlyWood"></Button>
+        <Button Grid.Row="2" Grid.Column="2" Content="Edge Cookies" Background="BurlyWood"></Button>
+        <Button Grid.Row="2" Grid.Column="4" Content="Opera Cookies" Background="BurlyWood"></Button>
     </Grid>
 </Window>

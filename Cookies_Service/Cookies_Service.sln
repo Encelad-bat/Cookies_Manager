@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cookies_Manager", "Cookies_Manager.csproj", "{854070A8-C2C0-42FD-BFFE-B9EFA5461D78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cookies_Service", "Cookies_Service.csproj", "{85C68CD4-5FDE-4383-87EB-81873103B79A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{854070A8-C2C0-42FD-BFFE-B9EFA5461D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{854070A8-C2C0-42FD-BFFE-B9EFA5461D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{854070A8-C2C0-42FD-BFFE-B9EFA5461D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{854070A8-C2C0-42FD-BFFE-B9EFA5461D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85C68CD4-5FDE-4383-87EB-81873103B79A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85C68CD4-5FDE-4383-87EB-81873103B79A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85C68CD4-5FDE-4383-87EB-81873103B79A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85C68CD4-5FDE-4383-87EB-81873103B79A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {150567B1-8FB4-4C7E-BC01-FC2217B9AB3F}
+		SolutionGuid = {C963CF8D-7FAE-4299-B7F0-C190ED880F55}
 	EndGlobalSection
 EndGlobal
