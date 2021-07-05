@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.Win32;
 
 namespace Cookies_Service
 {
     [Table("cookies")]
     class Chrome_Cookies : Browser_Cookies
     {
-        public override string Path { get; } = @"C:\Users\Kneven\AppData\Local\Google\Chrome\User Data\Default";
+        public override string Path { get; } = $"C:\\Users\\Kneven\\AppData\\Local\\Google\\Chrome\\User Data\\Default";
 
         public Int64 creation_utc { get; set; }
 

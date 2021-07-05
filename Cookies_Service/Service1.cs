@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,14 +37,49 @@ namespace Cookies_Service
         {
             try
             {
-                var chrome_cookies = new Chrome_Cookies();
-                var collection = chrome_cookies.Load<Chrome_Cookies>(chrome_cookies.Path);
+                //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies");
-                foreach (Chrome_Cookies item in collection)
+
+
+                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies"))
                 {
-                    File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\cookies\\{collection.IndexOf(item)}.txt", item.ToString());
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies");
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Chrome");
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Opera");
                 }
+                if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Chrome")){
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Chrome");
+                }
+                if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Opera")){
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Opera");
+                }
+
+
+                //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+
+                Chrome_Cookies chrome_cookies = new Chrome_Cookies();
+                List<Chrome_Cookies> chrome_collection = chrome_cookies.Load<Chrome_Cookies>(chrome_cookies.Path);
+
+                foreach (Chrome_Cookies item in chrome_collection)
+                {
+                    File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\cookies\\Chrome\\{chrome_collection.IndexOf(item)}.txt", item.ToString());
+                }
+
+
+                //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+
+                Opera_Cookies opera_cookies = new Opera_Cookies();
+                List<Opera_Cookies> opera_collection = opera_cookies.Load<Opera_Cookies>(opera_cookies.Path);
+
+                foreach (Opera_Cookies item in opera_collection)
+                {
+                    File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\cookies\\Opera\\{opera_collection.IndexOf(item)}.txt", item.ToString());
+                }
+
+
+                //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
             }
             catch (Exception ex)
             {

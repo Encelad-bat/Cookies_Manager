@@ -1,4 +1,6 @@
-﻿namespace Cookies_Service
+﻿using Microsoft.Win32;
+
+namespace Cookies_Service
 {
     partial class Cookies_ServiceInstaller
     {
