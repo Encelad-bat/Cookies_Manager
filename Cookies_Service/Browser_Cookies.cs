@@ -17,7 +17,7 @@ namespace Cookies_Service
             {
                 try
                 {
-                    var result = conn.Query<T>("select * from cookies;").ToList();
+                    var result = conn.Query<T>("SELECT * FROM cookies;").ToList();
                     return result;
                 }
                 catch(Exception ex)
