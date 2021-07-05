@@ -79,6 +79,7 @@
     <Compile Include="Cookies_ServiceInstaller.Designer.cs">
       <DependentUpon>Cookies_ServiceInstaller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Edge_Cookies.cs" />
     <Compile Include="Opera_Cookies.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>

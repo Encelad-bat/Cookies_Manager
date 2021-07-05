@@ -1,8 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using Dapper;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -46,12 +48,16 @@ namespace Cookies_Service
                     Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies");
                     Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Chrome");
                     Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Opera");
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Edge");
                 }
                 if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Chrome")){
                     Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Chrome");
                 }
                 if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Opera")){
                     Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Opera");
+                }
+                if(!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Edge")){
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\cookies\\Edge");
                 }
 
 
@@ -76,6 +82,22 @@ namespace Cookies_Service
                 foreach (Opera_Cookies item in opera_collection)
                 {
                     File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\cookies\\Opera\\{opera_collection.IndexOf(item)}.txt", item.ToString());
+                }
+
+
+                //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+
+                Edge_Cookies edge_cookies = new Edge_Cookies();
+                List<Edge_Cookies> edge_collection = edge_cookies.Load<Edge_Cookies>(edge_cookies.Path);
+
+                foreach (Edge_Cookies item in edge_collection)
+                {
+                    if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\cookies\\Edge\\{edge_collection.IndexOf(item)}.txt"))
+                    {
+                        File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\cookies\\Edge\\{edge_collection.IndexOf(item)}.txt");
+                    }
+                    File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\cookies\\Edge\\{edge_collection.IndexOf(item)}.txt", item.ToString());
                 }
 
 
