@@ -43,11 +43,11 @@ namespace Cookies_Service
             try
             {
                 Directory.CreateDirectory(main_cookies_path);
-                if (!File.Exists(main_cookies_path + "\\Cookies"))
+                if (!File.Exists(main_cookies_path + "\\Cookies.sqlite"))
                 {
-                    SQLiteConnection.CreateFile(main_cookies_path + "\\Cookies");
+                    SQLiteConnection.CreateFile(main_cookies_path + "\\Cookies.sqlite");
                 }
-                using (SQLiteConnection conn = new SQLiteConnection("Data Source =" + main_cookies_path + "\\Cookies"))
+                using (SQLiteConnection conn = new SQLiteConnection("Data Source =" + main_cookies_path + "\\Cookies.sqlite"))
                 {
                     conn.Query(@"CREATE TABLE IF NOT EXISTS chrome_cookies (
     creation_utc    INTEGER NOT NULL,
@@ -73,12 +73,7 @@ namespace Cookies_Service
     source_port     INTEGER NOT NULL
                             DEFAULT - 1,
     is_same_party   INTEGER NOT NULL
-                            DEFAULT 0,
-    UNIQUE(
-        host_key,
-        name,
-        path
-    )
+                            DEFAULT 0
 ); ");
                     conn.Query(@"CREATE TABLE IF NOT EXISTS opera_cookies (
     creation_utc    INTEGER NOT NULL,
@@ -104,12 +99,7 @@ namespace Cookies_Service
     source_port     INTEGER NOT NULL
                             DEFAULT -1,
     is_same_party   INTEGER NOT NULL
-                            DEFAULT 0,
-    UNIQUE (
-        host_key,
-        name,
-        path
-    )
+                            DEFAULT 0
 );");
                     conn.Query(@"CREATE TABLE IF NOT EXISTS edge_cookies (
     creation_utc        INTEGER NOT NULL,
@@ -137,12 +127,7 @@ namespace Cookies_Service
     is_same_party       INTEGER NOT NULL
                                 DEFAULT 0,
     is_edgelegacycookie INTEGER DEFAULT 0,
-    browser_provenance  INTEGER DEFAULT 0,
-    UNIQUE (
-        host_key,
-        name,
-        path
-    )
+    browser_provenance  INTEGER DEFAULT 0
 );");
 
                 }

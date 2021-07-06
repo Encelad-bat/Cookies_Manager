@@ -86,7 +86,7 @@
     <Compile Include="Model\Edge_Cookie.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\Opera_Cookie.cs" />
-    <Compile Include="ViewModel\Cookies_ViewModel.cs" />
+    <Compile Include="ViewModel\Cookie_ViewModel.cs" />
     <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

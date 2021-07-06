@@ -11,10 +11,10 @@ using Microsoft.Win32;
 
 namespace Cookies_Manager.ViewModel
 {
-    class Cookies_ViewModel : INotifyPropertyChanged
+    class Cookie_ViewModel : INotifyPropertyChanged
     {
 
-        private ObservableCollection<Chrome_Cookie> chrome_cookies = new ObservableCollection<Chrome_Cookie>(Model.Model.Read_Cookies<Chrome_Cookie>($"C:\\Users\\{Registry.CurrentUser.OpenSubKey("Volatile Environment").GetValue("USERNAME")}\\AppData\\Roaming\\Cookies_Service\\Cookies.sqlite"));
+        private ObservableCollection<Chrome_Cookie> chrome_cookies = new ObservableCollection<Chrome_Cookie>(Model.Model.Read_Cookies<Chrome_Cookie>($"C:\\Users\\{Registry.CurrentUser.OpenSubKey("Volatile Environment").GetValue("USERNAME")}\\AppData\\Roaming\\Cookies_Service"));
 
         public ObservableCollection<Chrome_Cookie> Chrome_cookies
         {
@@ -22,7 +22,7 @@ namespace Cookies_Manager.ViewModel
             set { chrome_cookies = value; OnPropertyChanged("Chrome_cookies"); }
         }
 
-        private ObservableCollection<Opera_Cookie> opera_cookies = new ObservableCollection<Opera_Cookie>(Model.Model.Read_Cookies<Opera_Cookie>($"C:\\Users\\{Registry.CurrentUser.OpenSubKey("Volatile Environment").GetValue("USERNAME")}\\AppData\\Roaming\\Cookies_Service\\Cookies"));
+        private ObservableCollection<Opera_Cookie> opera_cookies = new ObservableCollection<Opera_Cookie>(Model.Model.Read_Cookies<Opera_Cookie>($"C:\\Users\\{Registry.CurrentUser.OpenSubKey("Volatile Environment").GetValue("USERNAME")}\\AppData\\Roaming\\Cookies_Service"));
 
         public ObservableCollection<Opera_Cookie> Opera_cookies
         {
@@ -30,7 +30,7 @@ namespace Cookies_Manager.ViewModel
             set { opera_cookies = value; OnPropertyChanged("Opera_cookies"); }
         }
 
-        private ObservableCollection<Edge_Cookie> edge_cookies = new ObservableCollection<Edge_Cookie>(Model.Model.Read_Cookies<Edge_Cookie>($"C:\\Users\\{Registry.CurrentUser.OpenSubKey("Volatile Environment").GetValue("USERNAME")}\\AppData\\Roaming\\Cookies_Service\\Cookies"));
+        private ObservableCollection<Edge_Cookie> edge_cookies = new ObservableCollection<Edge_Cookie>(Model.Model.Read_Cookies<Edge_Cookie>($"C:\\Users\\{Registry.CurrentUser.OpenSubKey("Volatile Environment").GetValue("USERNAME")}\\AppData\\Roaming\\Cookies_Service"));
 
         public ObservableCollection<Edge_Cookie> Edge_cookies
         {

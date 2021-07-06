@@ -15,11 +15,11 @@ namespace Cookies_Service
         {
             try
             {
-                using (SQLiteConnection conn = new SQLiteConnection("Data Source =" + path + "\\Cookies"))
+                using (SQLiteConnection conn = new SQLiteConnection("Data Source =" + path + "\\Cookies.sqlite"))
                 {
                     foreach (T item in items)
                     {
-                        if(typeof(T) == typeof(Chrome_Cookie)) 
+                        if (typeof(T) == typeof(Chrome_Cookie)) 
                         {
                             conn.Query(@"INSERT INTO chrome_cookies (
                         creation_utc,
@@ -58,7 +58,7 @@ namespace Cookies_Service
                         @source_scheme,
                         @source_port,
                         @is_same_party
-                    );", item);
+                        );", item);
                         } // Insert Chrome_Cookies
 
                         else if (typeof(T) == typeof(Opera_Cookie)) 
@@ -100,7 +100,7 @@ namespace Cookies_Service
                         @source_scheme,
                         @source_port,
                         @is_same_party
-                    );", item);
+                        );", item);
                         } // Insert Opera_Cookies
 
                         if (typeof(T) == typeof(Edge_Cookie)) 
@@ -146,55 +146,64 @@ namespace Cookies_Service
                         @is_same_party,
                         @is_edgelegacycookie,
                         @browser_provenance
-                    );", item);
+                        );", item);
                         } // Insert Edge_Cookies
                     }
                 }
             }
             catch(Exception ex)
             {
-                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EXCEPTION_SQLITE.txt", "Exception: " + ex.Message + "\r\nException Path: " + ex.StackTrace);
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EXCEPTION_SQLITE.txt", "Exception: " + ex.Message + "\r\nException Path: " + ex.StackTrace); 
             } 
         }
 
         static public List<T> Read_Cookies<T>(string path)
         {
-            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies"))
+            try
             {
-                try
+                if(typeof(T) == typeof(Chrome_Cookie) && path.Contains("Cookies_Service"))
                 {
-                    if(typeof(T) == typeof(Chrome_Cookie) && path.Contains("Cookies_Service"))
+                    using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies.sqlite"))
                     {
                         var result = conn.Query<T>("SELECT * FROM chrome_cookies;").ToList();
                         return result;
                     }
-                    else if (typeof(T) == typeof(Opera_Cookie) && path.Contains("Cookies_Service"))
+                }
+                else if (typeof(T) == typeof(Opera_Cookie) && path.Contains("Cookies_Service"))
+                {
+                    using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies.sqlite"))
                     {
                         var result = conn.Query<T>("SELECT * FROM opera_cookies;").ToList();
                         return result;
                     }
-                    else if (typeof(T) == typeof(Edge_Cookie) && path.Contains("Cookies_Service"))
+                }
+                else if (typeof(T) == typeof(Edge_Cookie) && path.Contains("Cookies_Service"))
+                {
+                    using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies.sqlite"))
                     {
                         var result = conn.Query<T>("SELECT * FROM edge_cookies;").ToList();
                         return result;
                     }
-                    else
+                }
+                else
+                { 
+                    using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies"))
                     {
                         var result = conn.Query<T>("SELECT * FROM cookies;").ToList();
                         return result;
                     }
                 }
-                catch (Exception ex)
-                {
-                    File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EXCEPTION_SQLITE.txt", "Exception: " + ex.Message + "\r\nException Path: " + ex.StackTrace);
-                    return null;
-                }
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EXCEPTION_SQLITE.txt", "Exception: " + ex.Message + "\r\nException Path: " + ex.StackTrace);
+                return new List<T>();
             }
         }
 
         static public void Update_Cookie<T>(string path, List<T> items)
         {
-            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies"))
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies.sqlite"))
             {
                 try
                 {
@@ -219,7 +228,7 @@ namespace Cookies_Service
        source_scheme = @source_scheme,
        source_port = @source_port,
        is_same_party = @is_same_party
- WHERE host_key = @host_key",item);
+ WHERE host_key = @host_key;",item);
                         } // Update Chrome_Cookies
 
                         else if(typeof(T) == typeof(Opera_Cookie))
@@ -241,7 +250,7 @@ namespace Cookies_Service
        source_scheme = @source_scheme,
        source_port = @source_port,
        is_same_party = @is_same_party
- WHERE host_key = @host_key",item);
+ WHERE host_key = @host_key;",item);
                         } // Update Opera_Cookies
 
                         else if (typeof(T) == typeof(Edge_Cookie)) 
@@ -265,7 +274,7 @@ namespace Cookies_Service
        is_same_party = @is_same_party,
        is_edgelegacycookie = @is_edgelegacycookie,
        browser_provenance = @browser_provenance
- WHERE host_key = @host_key",item);
+ WHERE host_key = @host_key;",item);
                         } // Update Edge_Cookies
                     }
                 }
@@ -278,7 +287,7 @@ namespace Cookies_Service
 
         static public void Delete_Cookie<T>(string path, List<T> items)
         {
-            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies"))
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + path + "\\Cookies.sqlite"))
             {
                 try
                 {
