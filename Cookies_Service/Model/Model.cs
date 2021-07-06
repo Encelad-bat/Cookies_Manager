@@ -153,8 +153,8 @@ namespace Cookies_Service
             }
             catch(Exception ex)
             {
-                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EXCEPTION_SQLITE.txt", "Exception: " + ex.Message + "\r\nException Path: " + ex.StackTrace); 
-            } 
+                //File.WriteAllText("C:\\Users\\Kneven\\Desktop\\EXCEPTION_SQLITE.txt", "Exception: " + ex.Message + "\r\nException Path: " + ex.StackTrace); 
+            }
         }
 
         static public List<T> Read_Cookies<T>(string path)

@@ -28,8 +28,8 @@ namespace Cookies_Manager
             InitializeComponent();
             this.DataContext = new Cookie_ViewModel();
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromTicks(1000);
-            timer.Tick += Timer_Tick;
+            timer.Interval = TimeSpan.FromMilliseconds(10000);
+            timer.Tick += Timer_Tick;            
             timer.Start();
         }
 

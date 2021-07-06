@@ -33,6 +33,7 @@ namespace Cookies_Service
             this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
             this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
+            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             this.serviceInstaller1.DisplayName = "Cookies_Service";
             this.serviceInstaller1.Description = "Cookies_Service";
             // 
