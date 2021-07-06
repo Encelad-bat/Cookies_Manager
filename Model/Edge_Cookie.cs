@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cookies_Service
+namespace Cookies_Manager.Model
 {
     [Table("cookies")]
-    class Edge_Cookies : Browser_Cookies
+    class Edge_Cookie : Browser_Cookie
     {
 
         public override string Path { get; } = $"C:\\Users\\Kneven\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default";

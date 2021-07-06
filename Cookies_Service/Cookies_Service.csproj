@@ -71,16 +71,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Browser_Cookies.cs" />
-    <Compile Include="Chrome_Cookies.cs" />
+    <Compile Include="Model\Browser_Cookie.cs" />
+    <Compile Include="Model\Chrome_Cookie.cs" />
     <Compile Include="Cookies_ServiceInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Cookies_ServiceInstaller.Designer.cs">
       <DependentUpon>Cookies_ServiceInstaller.cs</DependentUpon>
     </Compile>
-    <Compile Include="Edge_Cookies.cs" />
-    <Compile Include="Opera_Cookies.cs" />
+    <Compile Include="Model\Edge_Cookie.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\Opera_Cookie.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>

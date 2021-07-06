@@ -37,14 +37,17 @@ namespace Cookies_Service
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            string main_cookies_path = "C:\\Users\\Kneven\\AppData\\Roaming\\Cookies_Service";
+            //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
             try
             {
-                Directory.CreateDirectory("C:\\Users\\Kneven\\AppData\\Roaming\\Cookies_Service");
-                if (!File.Exists("C:\\Users\\Kneven\\AppData\\Roaming\\Cookies_Service\\Cookies.sqlite"))
+                Directory.CreateDirectory(main_cookies_path);
+                if (!File.Exists(main_cookies_path + "\\Cookies"))
                 {
-                    SQLiteConnection.CreateFile("C:\\Users\\Kneven\\AppData\\Roaming\\Cookies_Service\\Cookies.sqlite");
+                    SQLiteConnection.CreateFile(main_cookies_path + "\\Cookies");
                 }
-                using (SQLiteConnection conn = new SQLiteConnection("Data Source = C:\\Users\\Kneven\\AppData\\Roaming\\Cookies_Service\\Cookies.sqlite"))
+                using (SQLiteConnection conn = new SQLiteConnection("Data Source =" + main_cookies_path + "\\Cookies"))
                 {
                     conn.Query(@"CREATE TABLE IF NOT EXISTS chrome_cookies (
     creation_utc    INTEGER NOT NULL,
@@ -147,168 +150,40 @@ namespace Cookies_Service
             catch (Exception ex)
             {
                 File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EXCEPTION.txt", "Exception: " + ex.Message + "\r\nException Path: " + ex.StackTrace);
-            }
+            } // SQLite database and tables create
+
+            //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+            List<Chrome_Cookie> chrome_cookies = Model.Read_Cookies<Chrome_Cookie>(new Chrome_Cookie().Path);
             try {
-                using(SQLiteConnection conn = new SQLiteConnection("Data Source = C:\\Users\\Kneven\\AppData\\Roaming\\Cookies_Service\\Cookies.sqlite"))
-                {
-                    //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-
-
-                    Chrome_Cookies chrome_cookies = new Chrome_Cookies();
-                    List<Chrome_Cookies> chrome_collection = chrome_cookies.Load<Chrome_Cookies>(chrome_cookies.Path);
-
-                    foreach (Chrome_Cookies item in chrome_collection)
-                    {
-                        conn.Query(@"INSERT INTO chrome_cookies (
-                        creation_utc,
-                        host_key,
-                        name,
-                        value,
-                        path,
-                        expires_utc,
-                        is_secure,
-                        is_httponly,
-                        last_access_utc,
-                        has_expires,
-                        is_persistent,
-                        priority,
-                        encrypted_value,
-                        samesite,
-                        source_scheme,
-                        source_port,
-                        is_same_party
-                    )
-                    VALUES (
-                        @creation_utc,
-                        @host_key,
-                        @name,
-                        @value,
-                        @path,
-                        @expires_utc,
-                        @is_secure,
-                        @is_httponly,
-                        @last_access_utc,
-                        @has_expires,
-                        @is_persistent,
-                        @priority,
-                        @encrypted_value,
-                        @samesite,
-                        @source_scheme,
-                        @source_port,
-                        @is_same_party
-                    );", item);
-                    }
-
-
-                    //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-
-
-                    Opera_Cookies opera_cookies = new Opera_Cookies();
-                    List<Opera_Cookies> opera_collection = opera_cookies.Load<Opera_Cookies>(opera_cookies.Path);
-
-                    foreach (Opera_Cookies item in opera_collection)
-                    {
-                        conn.Query(@"INSERT INTO opera_cookies (
-                        creation_utc,
-                        host_key,
-                        name,
-                        value,
-                        path,
-                        expires_utc,
-                        is_secure,
-                        is_httponly,
-                        last_access_utc,
-                        has_expires,
-                        is_persistent,
-                        priority,
-                        encrypted_value,
-                        samesite,
-                        source_scheme,
-                        source_port,
-                        is_same_party
-                    )
-                    VALUES (
-                        @creation_utc,
-                        @host_key,
-                        @name,
-                        @value,
-                        @path,
-                        @expires_utc,
-                        @is_secure,
-                        @is_httponly,
-                        @last_access_utc,
-                        @has_expires,
-                        @is_persistent,
-                        @priority,
-                        @encrypted_value,
-                        @samesite,
-                        @source_scheme,
-                        @source_port,
-                        @is_same_party
-                    );", item);
-                    }
-
-
-                    //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-
-
-                    Edge_Cookies edge_cookies = new Edge_Cookies();
-                    List<Edge_Cookies> edge_collection = edge_cookies.Load<Edge_Cookies>(edge_cookies.Path);
-
-                    foreach (Opera_Cookies item in opera_collection)
-                    {
-                        conn.Query(@"INSERT INTO edge_cookies (
-                        creation_utc,
-                        host_key,
-                        name,
-                        value,
-                        path,
-                        expires_utc,
-                        is_secure,
-                        is_httponly,
-                        last_access_utc,
-                        has_expires,
-                        is_persistent,
-                        priority,
-                        encrypted_value,
-                        samesite,
-                        source_scheme,
-                        source_port,
-                        is_same_party,
-                        is_edgelegacycookie,
-                        browser_provenance
-                    )
-                    VALUES (
-                        @creation_utc,
-                        @host_key,
-                        @name,
-                        @value,
-                        @path,
-                        @expires_utc,
-                        @is_secure,
-                        @is_httponly,
-                        @last_access_utc,
-                        @has_expires,
-                        @is_persistent,
-                        @priority,
-                        @encrypted_value,
-                        @samesite,
-                        @source_scheme,
-                        @source_port,
-                        @is_same_party,
-                        @is_edgelegacycookie,
-                        @browser_provenance
-                    );", item);
-                    }
-
-
-                    //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-                }
+                Model.Create_Cookie<Chrome_Cookie>(main_cookies_path, chrome_cookies);
             }
             catch
             {
-
+                Model.Delete_Cookie<Chrome_Cookie>(main_cookies_path, chrome_cookies);
             }
+            
+
+            List<Opera_Cookie> opera_cookies = Model.Read_Cookies<Opera_Cookie>(new Opera_Cookie().Path);
+            try
+            {
+                Model.Create_Cookie<Opera_Cookie>(main_cookies_path, opera_cookies);
+            }
+            catch
+            {
+                Model.Delete_Cookie<Opera_Cookie>(main_cookies_path, opera_cookies);
+            }
+
+            List<Edge_Cookie> edge_cookies = Model.Read_Cookies<Edge_Cookie>(new Edge_Cookie().Path);
+            try
+            {
+                Model.Create_Cookie<Edge_Cookie>(main_cookies_path, edge_cookies);
+            }
+            catch
+            {
+                Model.Delete_Cookie<Edge_Cookie>(main_cookies_path, edge_cookies);
+            }
+
+            //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
         }
 
         protected override void OnStop()

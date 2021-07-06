@@ -4,15 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dapper;
-using Microsoft.Win32;
 
 namespace Cookies_Service
 {
     [Table("cookies")]
-    class Chrome_Cookies : Browser_Cookies
+    class Opera_Cookie : Browser_Cookie
     {
-        public override string Path { get; } = $"C:\\Users\\Kneven\\AppData\\Local\\Google\\Chrome\\User Data\\Default";
+
+        public override string Path { get; } = $"C:\\Users\\Kneven\\AppData\\Roaming\\Opera Software\\Opera Stable";
 
         public Int64 creation_utc { get; set; }
 
@@ -52,5 +51,6 @@ namespace Cookies_Service
         {
             return $"{this.creation_utc}|{this.host_key}|{this.name}|{this.value}|{this.path}|{this.expires_utc}|{this.is_secure}|{this.is_httponly}|{this.last_access_utc}|{this.has_expires}|{this.is_persistent}|{this.priority}|{this.encrypted_value}|{this.samesite}|{this.source_scheme}|{this.source_port}|{this.is_same_party}|";
         }
+
     }
 }

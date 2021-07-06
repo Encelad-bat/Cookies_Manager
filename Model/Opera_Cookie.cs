@@ -1,15 +1,14 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cookies_Service
+namespace Cookies_Manager.Model
 {
     [Table("cookies")]
-    class Opera_Cookies : Browser_Cookies
+    class Opera_Cookie : Browser_Cookie
     {
 
         public override string Path { get; } = $"C:\\Users\\Kneven\\AppData\\Roaming\\Opera Software\\Opera Stable";

@@ -22,12 +22,12 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="data_ListView" Grid.ColumnSpan="5" Background="CornflowerBlue"></ListView>
+        <DataGrid x:Name="data_ListView" Grid.ColumnSpan="5" Background="CornflowerBlue" DataContext="{Binding Chrome_cookies}"></DataGrid>
         <Canvas Grid.Row="2" Grid.Column="0" Background="CornflowerBlue" Grid.ColumnSpan="5"></Canvas>
         <Canvas Grid.Row="1" Grid.Column="0" Background="CornflowerBlue" Grid.ColumnSpan="5"></Canvas>
         <Canvas Grid.Row="3" Grid.Column="0" Background="CornflowerBlue" Grid.ColumnSpan="5"></Canvas>
-        <Button Grid.Row="2" Grid.Column="0" Content="Chrome Cookies" Background="BurlyWood"></Button>
-        <Button Grid.Row="2" Grid.Column="2" Content="Edge Cookies" Background="BurlyWood"></Button>
-        <Button Grid.Row="2" Grid.Column="4" Content="Opera Cookies" Background="BurlyWood"></Button>
+        <Button Grid.Row="2" Grid.Column="0" Content="Chrome Cookies" Background="BurlyWood" BorderBrush="DarkGoldenrod" BorderThickness="1.5"></Button>
+        <Button Grid.Row="2" Grid.Column="2" Content="Edge Cookies" Background="BurlyWood" BorderBrush="DarkGoldenrod" BorderThickness="1.5"></Button>
+        <Button Grid.Row="2" Grid.Column="4" Content="Opera Cookies" Background="BurlyWood" BorderBrush="DarkGoldenrod" BorderThickness="1.5"></Button>
     </Grid>
 </Window>
